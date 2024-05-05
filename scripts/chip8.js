@@ -1,5 +1,8 @@
 import Renderer from "./renderer.js";
+import Keyboard from "./keyboard.js";
+
 const renderer = new Renderer(10);
+const keyboard = new Keyboard();
 
 let loop;
 let fps = 60, interval = 1000/fps;

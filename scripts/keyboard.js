@@ -39,6 +39,6 @@ class Keyboard {
     isKeyPressed(key) {
         return this.keyPressed[key];
     }
-
-
 }
+
+export default Keyboard
