@@ -49,7 +49,7 @@ class Renderer {
             for(let x=0;x<this.cols;x++) {
                 if(this.display[y*this.cols+x]) {
                     this.ctx.fillStyle = this.color
-                    this.ctx.fillRect(x,y,this.scale,this.scale)
+                    this.ctx.fillRect(x*this.scale,y*this.scale,this.scale,this.scale)
                 }
             }
         }
@@ -57,7 +57,8 @@ class Renderer {
 
     testRender() {
         this.togglePixel(0,0)
-        this.togglePixel(2,5)
+        this.togglePixel(63,31)
+        this.render()
     }
 
 }
