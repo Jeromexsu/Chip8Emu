@@ -5,5 +5,5 @@ A Chip-8 Emulator
 - [ ] volumn control
 - [x] rom selector
 - [ ] color changer
-- [ ] pause
+- [x] pause
 - [ ] save/load

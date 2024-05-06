@@ -6,7 +6,7 @@ class CPU {
     delayTimer = 0;
     soundTimer = 0;
     pc = 0x200;
-    pause = false;
+    paused = false;
     speed = 10;
     speaker;
     renderer;
@@ -23,7 +23,7 @@ class CPU {
         this.soundTimer = 0;
         this.pc = 0x200;
         this.stack = new Array();
-        this.pause = false;
+        this.paused = false;
         this.speed = 10
     }
 
@@ -62,11 +62,15 @@ class CPU {
             this.memory[0x200 + i] = program[i];
         }
     }
+    
+    togglePause() {
+        this.paused = !this.paused;
+    }
 
 
     cycle() {
         for(let i = 0; i < this.speed; i++) {
-            if(!this.pause) {
+            if(!this.paused) {
                 // Fetch instruction
                 let instruction = (this.memory[this.pc] << 8) | this.memory[this.pc + 1];
                 // console.log(opcode);
@@ -77,7 +81,7 @@ class CPU {
             }
         }
 
-        if(!this.pause) this.updateTimers();
+        if(!this.paused) this.updateTimers();
         this.playSound();
         this.renderer.render();
     }
@@ -266,10 +270,10 @@ class CPU {
                         break;
                     case(0x0A):
                         // Wait for a key press, store the value of the key in Vx
-                        this.pause = true;
+                        this.paused = true;
                         this.keyboard.waitForKey = (key) => {
                             this.registers[x] = key;
-                            this.pause = false;
+                            this.paused = false;
                         }
                         break;
                     case(0x15):

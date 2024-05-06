@@ -11,9 +11,10 @@ var cpu = new CPU(renderer,speaker,keyboard);
 let loop;
 let fps = 60, interval = 1000/fps;
 let now, then, elapsed;
-const romSelector = document.querySelector('#rom-selector');
 
+const romSelector = document.querySelector('#rom-selector');
 const enableSoundButton = document.querySelector('#enableSoundButton');
+const pauseButton = document.querySelector('#pauseButton');
 
 function init() {
     if (enableSoundButton) {
@@ -21,6 +22,13 @@ function init() {
             speaker.init();
             // console.log('Sound enabled');
         });
+    }
+    if(pauseButton) {
+        pauseButton.addEventListener('click', () => {
+            cpu.togglePause();
+            pauseButton.textContent = cpu.paused ? 'resume' : 'pause';
+        })
+
     }
     if (romSelector instanceof HTMLInputElement) {
         romSelector.addEventListener('change', (event) => {
@@ -39,6 +47,7 @@ function init() {
         })
     }
 }
+
 
 function step() {
     now = Date.now();
