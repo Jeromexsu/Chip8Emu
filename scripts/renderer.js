@@ -21,12 +21,13 @@ class Renderer {
      */
     togglePixel(x,y) {
         // according to the technical reference, if a pixel is positioned outside of the bounds of the display, it should wrap around to the opposite side
-        x %= this.cols
-        if(x<0) x += this.cols
-        y %=  this.rows
-        if(y<0) y += this.rows
+        while(x < 0) x += this.cols
+        while(x > this.cols) x -= this.cols
+        while(y < 0) y += this.rows
+        while(y > this.rows) y -= this.rows
+        
         let loc = y*this.cols+x
-        this.display[loc] = 1 - this.display[loc]
+        this.display[loc] ^= 1
         return !this.display[loc]
     }
 

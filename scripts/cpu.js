@@ -65,7 +65,7 @@ class CPU {
             }
         };
 
-        xhr.open('GET', 'roms/15PUZZLE');
+        xhr.open('GET', 'roms/BLITZ');
         xhr.responseType = 'arraybuffer'
         xhr.send();
     }
