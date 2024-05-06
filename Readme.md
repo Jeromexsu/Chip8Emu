@@ -1,7 +1,8 @@
 A Chip-8 Emulator
 
 ## Todo
--[] fix sound
+-[x] fix sound
+-[] volumn control
 -[] file selector
 -[] color changer
 -[] pause
