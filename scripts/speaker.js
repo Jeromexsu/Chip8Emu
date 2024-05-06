@@ -21,9 +21,9 @@ class Speaker {
     }
 
     stop() {
-        this.oscillator.stop();
-        this.oscillator.disconnect();
-        this.oscillator = null;
+        // this.oscillator.stop();
+        // this.oscillator.disconnect();
+        // this.oscillator = null;
     }
 
 }

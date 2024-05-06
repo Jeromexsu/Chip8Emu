@@ -6,7 +6,7 @@ import CPU from "./cpu.js";
 const renderer = new Renderer(10);
 const keyboard = new Keyboard();
 const speaker = new Speaker();
-const cpu = new CPU();
+const cpu = new CPU(renderer,speaker,keyboard);
 
 let loop;
 let fps = 60, interval = 1000/fps;
@@ -15,12 +15,6 @@ let now, then, elapsed;
 const playButton = document.querySelector('playButton');
 const stopButton = document.querySelector('stopButton');
 function init() {
-    cpu.loadRom();
-    renderer.testRender();
-
-    then = Date.now();
-    loop = requestAnimationFrame(step);
-
     if (playButton) {
         playButton.addEventListener('click', () => {
             speaker.play();
@@ -31,6 +25,11 @@ function init() {
             speaker.stop()
         })
     } 
+    cpu.loadSpritesIntoMemory();
+    cpu.loadRom();
+
+    then = Date.now();
+    loop = requestAnimationFrame(step);
 }
 
 function step() {
@@ -39,6 +38,7 @@ function step() {
 
     if(elapsed > interval) {
         // time to Cycle the CPU
+        cpu.cycle();
     }
 
     loop = requestAnimationFrame(step);

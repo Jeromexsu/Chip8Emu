@@ -65,7 +65,7 @@ class CPU {
             }
         };
 
-        xhr.open('GET', 'roms/BLITZ');
+        xhr.open('GET', 'roms/15PUZZLE');
         xhr.responseType = 'arraybuffer'
         xhr.send();
     }
@@ -85,6 +85,7 @@ class CPU {
 
         if(!this.pause) this.updateTimers();
         this.playSound();
+        this.renderer.render();
     }
 
     updateTimers() {
