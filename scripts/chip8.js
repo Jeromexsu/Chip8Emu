@@ -12,19 +12,15 @@ let loop;
 let fps = 60, interval = 1000/fps;
 let now, then, elapsed;
 
-const playButton = document.querySelector('playButton');
-const stopButton = document.querySelector('stopButton');
+const enableSoundButton = document.querySelector('#enableSoundButton');
 function init() {
-    if (playButton) {
-        playButton.addEventListener('click', () => {
-            speaker.play();
+    if (enableSoundButton) {
+        enableSoundButton.addEventListener('click', () => {
+            speaker.init();
+            console.log('Sound enabled');
         });
     }
-    if(stopButton){
-        stopButton.addEventListener('click',()=>{
-            speaker.stop()
-        })
-    }
+
     cpu.loadSpritesIntoMemory();
     cpu.loadRom();
 

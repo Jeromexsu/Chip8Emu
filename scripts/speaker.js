@@ -1,17 +1,24 @@
 class Speaker {
     DEFAULT_FREQUENCY = 440;
-
-    ctx = new window.AudioContext();
-    gain = this.ctx.createGain(); // volumn control
-    destination = this.ctx.destination;
+    ctx;
+    gain; // volumn control
+    destination;
     oscillator;
+    enabled = false;
 
-    constructor() {
+    init() {
+        this.ctx = new window.AudioContext();
+        this.gain = this.ctx.createGain();
+        this.destination = this.ctx.destination;
         this.gain.connect(this.destination);
+        this.play(440);
+        this.enabled = true;
+
     }
 
     play(frequency) {
-        if(this.oscillator === undefined || this.oscillator === null) {
+        console.log(this.oscillator)
+        if(this.enabled && !this.oscillator) {
             this.oscillator = this.ctx.createOscillator();
             this.oscillator.frequency.setValueAtTime(frequency || this.DEFAULT_FREQUENCY, this.ctx.currentTime);
             this.oscillator.type = 'square';
@@ -21,9 +28,11 @@ class Speaker {
     }
 
     stop() {
-        // this.oscillator.stop();
-        // this.oscillator.disconnect();
-        // this.oscillator = null;
+        if(this.ctx && this.oscillator && this.ctx.state === 'running') {
+            this.oscillator.stop();
+            this.oscillator.disconnect();
+            this.oscillator = null;
+        }
     }
 
 }
