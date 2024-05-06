@@ -56,8 +56,10 @@ function loadRom(file) {
     return new Promise((resolve,reject) => {
         const reader = new FileReader();
         reader.onload = () => {
-            const program = new Uint8Array(reader.result);
-            resolve(program); 
+            if(reader.result instanceof ArrayBuffer) {
+                const program = new Uint8Array(reader.result);
+                resolve(program); 
+            }
         }
         reader.onerror = () => {
             reject(reader.error); // Reject the promise if there's an error
