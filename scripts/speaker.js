@@ -17,7 +17,6 @@ class Speaker {
     }
 
     play(frequency) {
-        console.log(this.oscillator)
         if(this.enabled && !this.oscillator) {
             this.oscillator = this.ctx.createOscillator();
             this.oscillator.frequency.setValueAtTime(frequency || this.DEFAULT_FREQUENCY, this.ctx.currentTime);

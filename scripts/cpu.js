@@ -1,21 +1,32 @@
 class CPU {
     memory = new Uint8Array(4096);
+    stack = new Array();
     registers = new Uint8Array(16);
     i = 0; // memory address register
     delayTimer = 0;
     soundTimer = 0;
     pc = 0x200;
-    stack = new Array();
     pause = false;
-    speed = 10
+    speed = 10;
     speaker;
     renderer;
     keyboard;
+
     constructor(renderer,speaker,keyboard) {
         this.renderer = renderer;
         this.speaker = speaker;
         this.keyboard = keyboard;
+        this.memory = new Uint8Array(4096);
+        this.registers = new Uint8Array(16);
+        this.i = 0; // memory address register
+        this.delayTimer = 0;
+        this.soundTimer = 0;
+        this.pc = 0x200;
+        this.stack = new Array();
+        this.pause = false;
+        this.speed = 10
     }
+
 
     loadSpritesIntoMemory() {
         // Array of hex values for each sprite. Each sprite is 5 bytes.
@@ -52,23 +63,6 @@ class CPU {
         }
     }
 
-    loadRom() {
-        var xhr = new XMLHttpRequest();
-        var self = this;
-
-        xhr.onload = function() {
-            if (xhr.response) {
-                // Create a Uint8Array from the ArrayBuffer
-                let program = new Uint8Array(xhr.response);
-                // Load the ROM into memory
-                self.loadProgramIntoMemory(program);
-            }
-        };
-
-        xhr.open('GET', 'roms/UFO');
-        xhr.responseType = 'arraybuffer'
-        xhr.send();
-    }
 
     cycle() {
         for(let i = 0; i < this.speed; i++) {

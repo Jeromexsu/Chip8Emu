@@ -27,7 +27,7 @@ class Keyboard {
     onKeyDown(e) {
         let key = this.KEY_MAP[e.keyCode];
         if(key === undefined || key === null) return;
-        console.log(key);
+        // console.log(key);
         this.keyPressed[key] = true;
         if(this.waitForKey) {
             this.waitForKey(key);
@@ -37,7 +37,7 @@ class Keyboard {
 
     onKeyUp(e) {
         let key = this.KEY_MAP[e.keyCode];
-        console.log(key);
+        // console.log(key);
         this.keyPressed[key] = false;
     }
 
