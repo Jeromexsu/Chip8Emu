@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>Chip-8 Emulator by Jeremy Su</title>
         <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
     </head>
     <body>
-        <div>
+        <h1>Chip-8 Emulator By Jeremy Su</h1>
+        <div style="padding-bottom: 1%;">
             <input type="file" id="rom-selector">
         </div>
-        <canvas></canvas>
-        <div id="sound">
+        <div style="padding-bottom: 1%;">
+            <canvas></canvas>
+        </div>
+        <div id="functions">
             <button id="enableSoundButton">enable sound</button>
-        </div>
-        <div id="pause">
             <button id="pauseButton">pause</button>
-        </div>
 
+        </div>
         <script type="module" src="scripts/chip8.js"></script>
         
     </body>
