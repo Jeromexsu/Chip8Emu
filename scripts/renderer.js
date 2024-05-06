@@ -1,10 +1,11 @@
 // renderer handles all graphic related stuff
 class Renderer {
-    cols = 64
-    rows = 32
+    cols = 64+1
+    rows = 32+1
     display = new Array(this.cols*this.rows).fill(false)
     color = 'black'
     constructor(scale) {
+        // console.log(this.display)
         this.scale = scale;
         this.canvas = document.querySelector('canvas')
         // canvas cannot be null, or fatal error
@@ -21,13 +22,14 @@ class Renderer {
      */
     togglePixel(x,y) {
         // according to the technical reference, if a pixel is positioned outside of the bounds of the display, it should wrap around to the opposite side
-        while(x < 0) x += this.cols
-        while(x > this.cols) x -= this.cols
-        while(y < 0) y += this.rows
-        while(y > this.rows) y -= this.rows
-        
+        x = x % this.cols;
+        if(x < 0) x = this.cols + x;
+        y = y % this.rows;
+        if(y < 0) y = this.rows + y;
+
         let loc = y*this.cols+x
         this.display[loc] ^= 1
+        // console.log(`Pixel at (${x},${y}) is ${this.display[loc] ? 'on' : 'off'}`)
         return !this.display[loc]
     }
 
@@ -57,8 +59,8 @@ class Renderer {
     }
 
     testRender() {
-        this.togglePixel(0,0)
-        this.togglePixel(63,31)
+        // this.togglePixel(0,0)
+        this.togglePixel(64,32)
         this.render()
     }
 

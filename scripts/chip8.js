@@ -24,7 +24,7 @@ function init() {
         stopButton.addEventListener('click',()=>{
             speaker.stop()
         })
-    } 
+    }
     cpu.loadSpritesIntoMemory();
     cpu.loadRom();
 
